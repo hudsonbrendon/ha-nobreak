@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 
 from homeassistant.config_entries import ConfigEntry
@@ -110,6 +111,9 @@ class NobreakCoordinator(DataUpdateCoordinator[dict[str, str]]):
             await self.client.set_var(self.ups, name, value)
         except NutError as err:
             raise HomeAssistantError(f"upsd refused {name}={value}: {err}") from err
+        # ponytail: the driver writes the HID report and only then re-reads it
+        # into upsd; 2 s covers its pollinterval, a read-back loop if ever needed
+        await asyncio.sleep(2)
         await self.async_refresh()
 
     async def async_command(self, command: str) -> None:
