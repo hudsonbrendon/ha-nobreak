@@ -1,6 +1,9 @@
 {
   "domain": "nobreak",
   "name": "Nobreak (NUT)",
+  "after_dependencies": [
+    "energy"
+  ],
   "codeowners": [
     "@hudsonbrendon"
   ],
@@ -13,5 +16,5 @@
   "requirements": [
     "pyusb>=1.2.1"
   ],
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
