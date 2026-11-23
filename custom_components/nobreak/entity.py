@@ -14,6 +14,15 @@ from .coordinator import NobreakCoordinator
 _VIA_DEVICE_ID = "via_device_id" in getattr(DeviceInfo, "__annotations__", {})
 
 
+def _nut_device(coordinator: NobreakCoordinator, uid: str) -> dr.DeviceEntry | None:
+    """The core NUT device of the same UPS (its entry has the same unique id)."""
+    hass = coordinator.hass
+    for entry in hass.config_entries.async_entries(NUT_DOMAIN):
+        if entry.unique_id == uid:
+            return dr.async_get(hass).async_get_device_by_identifier((NUT_DOMAIN, uid), entry.entry_id)
+    return None
+
+
 class NobreakEntity(CoordinatorEntity[NobreakCoordinator]):
     _attr_has_entity_name = True
 
@@ -36,7 +45,7 @@ class NobreakEntity(CoordinatorEntity[NobreakCoordinator]):
         }
         if not _VIA_DEVICE_ID:
             info["via_device"] = (NUT_DOMAIN, uid)
-        elif nut := dr.async_get(coordinator.hass).async_get_device(identifiers={(NUT_DOMAIN, uid)}):
+        elif nut := _nut_device(coordinator, uid):
             info["via_device_id"] = nut.id
         self._attr_device_info = DeviceInfo(**info)
 
