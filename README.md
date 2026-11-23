@@ -14,8 +14,8 @@
 [![License](https://img.shields.io/github/license/hudsonbrendon/ha-nobreak)](LICENSE)
 
 The core **Network UPS Tools** integration shows what `upsd` reports, read
-only. This one sits next to it, on the **same device**, and adds what is
-missing:
+only. This one sits next to it (its own **Nobreak** device, linked to the
+NUT one with "connected via") and adds what is missing:
 
 - **Controls** for every writable upsd variable: input **sensitivity**
   (select), **low/high transfer voltages**, shutdown/startup **delays** and
