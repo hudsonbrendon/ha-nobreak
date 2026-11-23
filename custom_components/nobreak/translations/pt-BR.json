@@ -1,0 +1,146 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Servidor NUT",
+        "description": "Conecte ao upsd (o add-on Network UPS Tools é `a0d7b954-nut`). Usuário e senha são os do usuário NUT com permissão de comandos (`instcmds`) e de alterar variáveis (`actions: SET`); sem eles a integração fica só leitura.",
+        "data": {
+          "host": "Host",
+          "port": "Porta",
+          "username": "Usuário",
+          "password": "Senha",
+          "ups": "Nome do nobreak"
+        },
+        "data_description": {
+          "ups": "Deixe vazio quando o upsd tem um nobreak só."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Não foi possível conectar ao upsd.",
+      "ups_not_found": "Esse nobreak não existe no upsd."
+    },
+    "abort": {
+      "already_configured": "Esse nobreak já está configurado."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "potencia_de_saida": {
+        "name": "Potência de saída"
+      },
+      "energia_de_saida": {
+        "name": "Energia de saída"
+      },
+      "quedas_de_energia": {
+        "name": "Quedas de energia"
+      },
+      "ultima_queda": {
+        "name": "Última queda"
+      },
+      "duracao_da_ultima_queda": {
+        "name": "Duração da última queda"
+      },
+      "tempo_na_bateria": {
+        "name": "Tempo na bateria"
+      },
+      "ultimo_autoteste": {
+        "name": "Último autoteste",
+        "state_attributes": {
+          "resultado": {
+            "name": "Resultado"
+          }
+        }
+      },
+      "idade_da_bateria": {
+        "name": "Idade da bateria"
+      },
+      "firmware": {
+        "name": "Firmware"
+      }
+    },
+    "binary_sensor": {
+      "rede_eletrica": {
+        "name": "Rede elétrica"
+      },
+      "bateria_fraca": {
+        "name": "Bateria fraca"
+      },
+      "carregando": {
+        "name": "Carregando"
+      },
+      "substituir_bateria": {
+        "name": "Substituir bateria"
+      },
+      "sobrecarga": {
+        "name": "Sobrecarga"
+      },
+      "avr": {
+        "name": "Regulação de tensão (AVR)"
+      },
+      "desligamento_agendado": {
+        "name": "Desligamento agendado"
+      }
+    },
+    "number": {
+      "transferencia_baixa": {
+        "name": "Transferência por tensão baixa"
+      },
+      "transferencia_alta": {
+        "name": "Transferência por tensão alta"
+      },
+      "atraso_desligamento": {
+        "name": "Atraso no desligamento"
+      },
+      "atraso_religamento": {
+        "name": "Atraso no religamento"
+      },
+      "carga_minima": {
+        "name": "Carga mínima da bateria"
+      },
+      "autonomia_minima": {
+        "name": "Autonomia mínima"
+      }
+    },
+    "select": {
+      "sensibilidade": {
+        "name": "Sensibilidade",
+        "state": {
+          "low": "Baixa",
+          "medium": "Média",
+          "high": "Alta"
+        }
+      }
+    },
+    "switch": {
+      "alarme_sonoro": {
+        "name": "Alarme sonoro"
+      }
+    },
+    "button": {
+      "autoteste_rapido": {
+        "name": "Autoteste rápido"
+      },
+      "autoteste_completo": {
+        "name": "Autoteste completo"
+      },
+      "parar_autoteste": {
+        "name": "Parar autoteste"
+      },
+      "testar_painel": {
+        "name": "Testar painel"
+      },
+      "silenciar_alarme": {
+        "name": "Silenciar alarme"
+      },
+      "cancelar_desligamento": {
+        "name": "Cancelar desligamento"
+      }
+    },
+    "date": {
+      "data_da_bateria": {
+        "name": "Data da bateria"
+      }
+    }
+  }
+}

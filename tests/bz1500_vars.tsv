@@ -1,0 +1,49 @@
+battery.charge	85
+battery.charge.low	30
+battery.charge.warning	50
+battery.date	2001/09/25
+battery.mfr.date	2107/15/31
+battery.runtime	468
+battery.runtime.low	180
+battery.type	PbAc
+battery.voltage	26.0
+battery.voltage.nominal	24.0
+device.mfr	APC by Schneider
+device.model	BZ1500XLBI-BR
+device.serial	VIDE ETIQUETA
+device.type	ups
+driver.debug	0
+driver.flag.allow_killpower	0
+driver.flag.ignorelb	enabled
+driver.name	usbhid-ups
+driver.parameter.interrupt_pipe_no_events_tolerance	-1
+driver.parameter.override.battery.charge.low	30
+driver.parameter.override.battery.runtime.low	180
+driver.parameter.pollfreq	30
+driver.parameter.pollinterval	2
+driver.parameter.port	auto
+driver.parameter.synchronous	auto
+driver.state	quiet
+driver.version	2.8.5
+driver.version.data	APC HID 0.101
+driver.version.internal	0.71
+driver.version.usb	libusb-1.0.28 (API: 0x0100010A)
+input.sensitivity	medium
+input.transfer.high	264
+input.transfer.low	178
+input.voltage	208.0
+input.voltage.nominal	220
+ups.beeper.status	muted
+ups.delay.shutdown	20
+ups.load	19
+ups.mfr	APC by Schneider
+ups.mfr.date	2107/15/31
+ups.model	BZ1500XLBI-BR
+ups.productid	0002
+ups.realpower.nominal	825
+ups.serial	VIDE ETIQUETA
+ups.status	OL CHRG
+ups.test.result	Done and passed
+ups.timer.reboot	0
+ups.timer.shutdown	-1
+ups.vendorid	051d

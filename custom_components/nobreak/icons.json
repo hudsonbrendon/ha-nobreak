@@ -1,0 +1,93 @@
+{
+  "entity": {
+    "sensor": {
+      "quedas_de_energia": {
+        "default": "mdi:transmission-tower-off"
+      },
+      "ultima_queda": {
+        "default": "mdi:flash-off"
+      },
+      "duracao_da_ultima_queda": {
+        "default": "mdi:timer-outline"
+      },
+      "tempo_na_bateria": {
+        "default": "mdi:battery-clock"
+      },
+      "ultimo_autoteste": {
+        "default": "mdi:battery-check"
+      },
+      "idade_da_bateria": {
+        "default": "mdi:battery-heart-variant"
+      },
+      "firmware": {
+        "default": "mdi:chip"
+      }
+    },
+    "binary_sensor": {
+      "avr": {
+        "default": "mdi:sine-wave"
+      },
+      "desligamento_agendado": {
+        "default": "mdi:power-plug-off"
+      }
+    },
+    "number": {
+      "transferencia_baixa": {
+        "default": "mdi:arrow-collapse-down"
+      },
+      "transferencia_alta": {
+        "default": "mdi:arrow-collapse-up"
+      },
+      "atraso_desligamento": {
+        "default": "mdi:timer-off-outline"
+      },
+      "atraso_religamento": {
+        "default": "mdi:timer-play-outline"
+      },
+      "carga_minima": {
+        "default": "mdi:battery-alert-variant-outline"
+      },
+      "autonomia_minima": {
+        "default": "mdi:battery-clock-outline"
+      }
+    },
+    "select": {
+      "sensibilidade": {
+        "default": "mdi:tune-vertical"
+      }
+    },
+    "switch": {
+      "alarme_sonoro": {
+        "default": "mdi:volume-high",
+        "state": {
+          "off": "mdi:volume-off"
+        }
+      }
+    },
+    "button": {
+      "autoteste_rapido": {
+        "default": "mdi:battery-check"
+      },
+      "autoteste_completo": {
+        "default": "mdi:battery-sync"
+      },
+      "parar_autoteste": {
+        "default": "mdi:stop-circle-outline"
+      },
+      "testar_painel": {
+        "default": "mdi:led-on"
+      },
+      "silenciar_alarme": {
+        "default": "mdi:volume-mute"
+      },
+      "cancelar_desligamento": {
+        "default": "mdi:power-plug"
+      }
+    },
+    "date": {
+      "data_da_bateria": {
+        "default": "mdi:calendar-check"
+      }
+    }
+  }
+}

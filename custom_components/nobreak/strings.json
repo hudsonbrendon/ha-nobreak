@@ -1,0 +1,146 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "NUT server",
+        "description": "Connect to upsd (the Network UPS Tools add-on is `a0d7b954-nut`). Username and password are the NUT user allowed to run commands (`instcmds`) and set variables (`actions: SET`); without them the integration is read-only.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "ups": "UPS name"
+        },
+        "data_description": {
+          "ups": "Leave empty when upsd serves a single UPS."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach upsd.",
+      "ups_not_found": "This UPS is not served by upsd."
+    },
+    "abort": {
+      "already_configured": "This UPS is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "potencia_de_saida": {
+        "name": "Output power"
+      },
+      "energia_de_saida": {
+        "name": "Output energy"
+      },
+      "quedas_de_energia": {
+        "name": "Power outages"
+      },
+      "ultima_queda": {
+        "name": "Last outage"
+      },
+      "duracao_da_ultima_queda": {
+        "name": "Last outage duration"
+      },
+      "tempo_na_bateria": {
+        "name": "Time on battery"
+      },
+      "ultimo_autoteste": {
+        "name": "Last self-test",
+        "state_attributes": {
+          "resultado": {
+            "name": "Result"
+          }
+        }
+      },
+      "idade_da_bateria": {
+        "name": "Battery age"
+      },
+      "firmware": {
+        "name": "Firmware"
+      }
+    },
+    "binary_sensor": {
+      "rede_eletrica": {
+        "name": "Utility power"
+      },
+      "bateria_fraca": {
+        "name": "Low battery"
+      },
+      "carregando": {
+        "name": "Charging"
+      },
+      "substituir_bateria": {
+        "name": "Replace battery"
+      },
+      "sobrecarga": {
+        "name": "Overload"
+      },
+      "avr": {
+        "name": "Voltage regulation (AVR)"
+      },
+      "desligamento_agendado": {
+        "name": "Shutdown scheduled"
+      }
+    },
+    "number": {
+      "transferencia_baixa": {
+        "name": "Low transfer voltage"
+      },
+      "transferencia_alta": {
+        "name": "High transfer voltage"
+      },
+      "atraso_desligamento": {
+        "name": "Shutdown delay"
+      },
+      "atraso_religamento": {
+        "name": "Startup delay"
+      },
+      "carga_minima": {
+        "name": "Low battery charge"
+      },
+      "autonomia_minima": {
+        "name": "Low battery runtime"
+      }
+    },
+    "select": {
+      "sensibilidade": {
+        "name": "Sensitivity",
+        "state": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        }
+      }
+    },
+    "switch": {
+      "alarme_sonoro": {
+        "name": "Audible alarm"
+      }
+    },
+    "button": {
+      "autoteste_rapido": {
+        "name": "Quick self-test"
+      },
+      "autoteste_completo": {
+        "name": "Deep self-test"
+      },
+      "parar_autoteste": {
+        "name": "Stop self-test"
+      },
+      "testar_painel": {
+        "name": "Test front panel"
+      },
+      "silenciar_alarme": {
+        "name": "Mute alarm"
+      },
+      "cancelar_desligamento": {
+        "name": "Cancel shutdown"
+      }
+    },
+    "date": {
+      "data_da_bateria": {
+        "name": "Battery date"
+      }
+    }
+  }
+}
