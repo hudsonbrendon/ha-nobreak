@@ -34,6 +34,10 @@ NUT one with "connected via") and adds what is missing:
   NUT driver never reads; when Home Assistant runs on the host the UPS is
   plugged into it is read once at startup (e.g. `BZ1500XLBI-181019`).
 
+Pair it with **[Nobreak Card](https://github.com/hudsonbrendon/nobreak-card)**,
+an animated Lovelace card (outlet → UPS → load drawing per state, stats,
+outage/self-test history and every control above).
+
 Commands that cut power to the outlets (`load.off`, `shutdown.reboot`,
 `driver.killpower`...) are deliberately **not** exposed: on most installs the
 UPS also powers Home Assistant itself.
