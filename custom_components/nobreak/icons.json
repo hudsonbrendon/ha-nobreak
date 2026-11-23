@@ -21,6 +21,39 @@
       },
       "firmware": {
         "default": "mdi:chip"
+      },
+      "saude_da_bateria": {
+        "default": "mdi:battery-heart-variant"
+      },
+      "autonomia_real": {
+        "default": "mdi:timer-sand"
+      },
+      "energia_hoje": {
+        "default": "mdi:lightning-bolt"
+      },
+      "energia_do_mes": {
+        "default": "mdi:lightning-bolt-outline"
+      },
+      "custo_hoje": {
+        "default": "mdi:cash"
+      },
+      "custo_do_mes": {
+        "default": "mdi:cash-multiple"
+      },
+      "tensao_minima_hoje": {
+        "default": "mdi:arrow-collapse-down"
+      },
+      "tensao_maxima_hoje": {
+        "default": "mdi:arrow-collapse-up"
+      },
+      "tempo_fora_da_faixa_hoje": {
+        "default": "mdi:sine-wave"
+      },
+      "regulacoes_avr_hoje": {
+        "default": "mdi:tune-variant"
+      },
+      "quedas_hoje": {
+        "default": "mdi:transmission-tower-off"
       }
     },
     "binary_sensor": {
@@ -62,6 +95,12 @@
         "state": {
           "off": "mdi:volume-off"
         }
+      },
+      "economia_automatica": {
+        "default": "mdi:leaf",
+        "state": {
+          "off": "mdi:leaf-off"
+        }
       }
     },
     "button": {
@@ -88,6 +127,24 @@
       "data_da_bateria": {
         "default": "mdi:calendar-check"
       }
+    },
+    "calendar": {
+      "quedas": {
+        "default": "mdi:calendar-alert"
+      }
+    },
+    "event": {
+      "eventos": {
+        "default": "mdi:flash-alert"
+      }
+    }
+  },
+  "services": {
+    "comando": {
+      "service": "mdi:console"
+    },
+    "definir_variavel": {
+      "service": "mdi:tune"
     }
   }
 }

@@ -23,11 +23,30 @@ NUT one with "connected via") and adds what is missing:
   and the **audible alarm** (switch).
 - **Buttons** for quick/deep **self-test**, stop test, **front panel test**,
   mute alarm and cancel a pending shutdown.
-- **Real power** (W, from `ups.realpower` or load % × nominal W) and an
-  **energy** counter (kWh) ready for the Energy dashboard.
-- **History** upsd does not keep: number of **power outages**, last outage,
-  its duration (live while on battery), total **time on battery**, **last
-  self-test** and its result, **battery age**.
+- **Real power** (W, from `ups.realpower` or load % × nominal W), **energy**
+  total / today / this month (kWh, Energy-dashboard ready) and its **cost**
+  today / this month (price from the options or the Energy dashboard).
+- **Battery health**: every stretch on battery (outage or self-test, ≥ 1 min
+  and ≥ 2 % drop) compares the discharge rate the UPS itself predicted with
+  the one observed → health %, discharge rate, and a **real runtime** (to empty
+  and to the shutdown limit) scaled to the current load.
+- **Outage history**: count, last outage, duration (live while on battery),
+  total time on battery, the last 10 outages as attributes (start, end, charge
+  before/after, energy drawn) and a **calendar** with one event per outage.
+- **Grid quality today**: minimum / maximum input voltage, time outside the
+  ANEEL "adequate" band (0.92–1.05 × nominal: 202–231 V at 220 V), AVR
+  activations and outages today.
+- **Event entity** (`queda`, `retorno`, `autoteste`, `medicao_bateria`,
+  `economia`) for automations and the logbook.
+- **Repairs**: replace battery, failed self-test, battery older than 3 years,
+  battery health below 60 %.
+- **Load shedding** (options + switch): stage 1 turns entities off after N
+  minutes on battery, stage 2 at a battery charge; both only during real
+  outages (never in a self-test) and optionally turned back on when power
+  returns.
+- **Actions**: `nobreak.comando` (allow-listed commands only) and
+  `nobreak.definir_variavel` (writable upsd variables, `driver.*` excluded).
+- **Last self-test** and its result, **battery age**.
 - **Binary sensors** from `ups.status`: utility power, low battery, charging,
   replace battery, overload, AVR (boost/trim), shutdown scheduled.
 - **Firmware**: APC HID units keep it in USB string descriptor 6, which the
@@ -74,7 +93,20 @@ Only variables that upsd lists as writable (`LIST RW`) and commands it lists
 The UPS may silently clamp a value it does not accept; the entity always
 shows the value read back.
 
+## Options
+
+| Option | Meaning |
+|---|---|
+| Energy price | Per kWh, for the cost sensors. Empty: the fixed grid price of the Energy dashboard. |
+| Stage 1 / after | Entities turned off after N minutes on battery. |
+| Stage 2 / at charge | Entities turned off when the battery reaches this %. |
+| Turn back on | Turn the shed entities (only those that were on) back on when power returns. |
+
 ## Notes
+
+- Battery health is a trend indicator: the UPS charge gauge is not linear and
+  its runtime estimate assumes a healthy battery, which is exactly what makes
+  the comparison useful.
 
 - Outages and the energy counter are computed from 10 s polls and survive
   restarts. Gaps longer than 5 minutes are not integrated. A self-test

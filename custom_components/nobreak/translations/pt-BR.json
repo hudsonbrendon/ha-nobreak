@@ -57,6 +57,86 @@
       },
       "firmware": {
         "name": "Firmware"
+      },
+      "saude_da_bateria": {
+        "name": "Saúde da bateria",
+        "state_attributes": {
+          "taxa_pct_por_min": {
+            "name": "Taxa de descarga (%/min)"
+          },
+          "potencia_media_w": {
+            "name": "Potência média (W)"
+          },
+          "medido_em": {
+            "name": "Medido em"
+          },
+          "duracao_s": {
+            "name": "Duração (s)"
+          },
+          "queda_pct": {
+            "name": "Queda de carga (%)"
+          }
+        }
+      },
+      "autonomia_real": {
+        "name": "Autonomia real",
+        "state_attributes": {
+          "ate_desligamento_min": {
+            "name": "Até o desligamento (min)"
+          }
+        }
+      },
+      "energia_hoje": {
+        "name": "Energia de saída hoje"
+      },
+      "energia_do_mes": {
+        "name": "Energia de saída do mês"
+      },
+      "custo_hoje": {
+        "name": "Custo hoje",
+        "state_attributes": {
+          "tarifa": {
+            "name": "Tarifa"
+          }
+        }
+      },
+      "custo_do_mes": {
+        "name": "Custo do mês",
+        "state_attributes": {
+          "tarifa": {
+            "name": "Tarifa"
+          }
+        }
+      },
+      "tensao_minima_hoje": {
+        "name": "Tensão mínima hoje",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Faixa adequada"
+          }
+        }
+      },
+      "tensao_maxima_hoje": {
+        "name": "Tensão máxima hoje",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Faixa adequada"
+          }
+        }
+      },
+      "tempo_fora_da_faixa_hoje": {
+        "name": "Tempo fora da faixa hoje",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Faixa adequada"
+          }
+        }
+      },
+      "regulacoes_avr_hoje": {
+        "name": "Regulações AVR hoje"
+      },
+      "quedas_hoje": {
+        "name": "Quedas hoje"
       }
     },
     "binary_sensor": {
@@ -115,6 +195,20 @@
     "switch": {
       "alarme_sonoro": {
         "name": "Alarme sonoro"
+      },
+      "economia_automatica": {
+        "name": "Economia automática",
+        "state_attributes": {
+          "desligados_agora": {
+            "name": "Desligados agora"
+          },
+          "estagio_1": {
+            "name": "Estágio 1"
+          },
+          "estagio_2": {
+            "name": "Estágio 2"
+          }
+        }
       }
     },
     "button": {
@@ -141,6 +235,109 @@
       "data_da_bateria": {
         "name": "Data da bateria"
       }
+    },
+    "calendar": {
+      "quedas": {
+        "name": "Quedas de energia"
+      }
+    },
+    "event": {
+      "eventos": {
+        "name": "Eventos",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "queda": "Queda de energia",
+              "retorno": "Energia voltou",
+              "autoteste": "Autoteste",
+              "medicao_bateria": "Bateria medida",
+              "economia": "Economia de energia"
+            }
+          }
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opções",
+        "description": "Tarifa da energia de saída e desligamento escalonado em 2 estágios na bateria (só em queda real, nunca no autoteste).",
+        "data": {
+          "tarifa": "Tarifa da energia (por kWh)",
+          "economia_estagio1": "Estágio 1: desligar",
+          "economia_atraso": "Estágio 1 depois de (minutos na bateria)",
+          "economia_estagio2": "Estágio 2: desligar",
+          "economia_carga": "Estágio 2 com bateria em (%)",
+          "economia_religar": "Religar quando a energia voltar"
+        },
+        "data_description": {
+          "tarifa": "Vazio: usa a tarifa fixa da rede do painel de Energia."
+        }
+      }
+    }
+  },
+  "issues": {
+    "substituir_bateria": {
+      "title": "Nobreak: substituir a bateria",
+      "description": "O nobreak indicou que a bateria precisa ser trocada (sinal RB)."
+    },
+    "autoteste_reprovado": {
+      "title": "Nobreak: autoteste reprovado",
+      "description": "O último autoteste terminou com: {resultado}. Verifique a bateria."
+    },
+    "bateria_antiga": {
+      "title": "Nobreak: bateria com {anos} anos",
+      "description": "A bateria foi instalada em {data}. Baterias seladas duram 3–5 anos; rode o autoteste completo e planeje a troca."
+    },
+    "saude_baixa": {
+      "title": "Nobreak: saúde da bateria em {saude}%",
+      "description": "Na última descarga a bateria esvaziou bem mais rápido do que o nobreak previa (saúde {saude}%). A autonomia real é menor do que a mostrada pelo nobreak."
+    }
+  },
+  "services": {
+    "comando": {
+      "name": "Executar comando",
+      "description": "Executa um comando permitido do nobreak (comandos que cortam as tomadas não estão disponíveis).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Nobreak",
+          "description": "Só é preciso com mais de um nobreak."
+        },
+        "comando": {
+          "name": "Comando",
+          "description": "Comando instantâneo do NUT."
+        }
+      }
+    },
+    "definir_variavel": {
+      "name": "Definir variável",
+      "description": "Grava uma variável gravável do upsd (driver.* fica de fora).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Nobreak",
+          "description": "Só é preciso com mais de um nobreak."
+        },
+        "variavel": {
+          "name": "Variável",
+          "description": "Por exemplo input.sensitivity."
+        },
+        "valor": {
+          "name": "Valor",
+          "description": "Novo valor."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "escolha_o_nobreak": {
+      "message": "Escolha o nobreak (config_entry_id): nenhum ou mais de um está carregado."
+    },
+    "comando_indisponivel": {
+      "message": "Este nobreak não aceita {comando}."
+    },
+    "variavel_nao_gravavel": {
+      "message": "{variavel} não é gravável. Graváveis: {gravaveis}."
     }
   }
 }

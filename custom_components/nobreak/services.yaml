@@ -1,0 +1,39 @@
+comando:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: nobreak
+    comando:
+      required: true
+      example: test.battery.start.quick
+      selector:
+        select:
+          options:
+            - beeper.disable
+            - beeper.enable
+            - beeper.mute
+            - beeper.off
+            - beeper.on
+            - shutdown.stop
+            - test.battery.start.deep
+            - test.battery.start.quick
+            - test.battery.stop
+            - test.panel.start
+            - test.panel.stop
+definir_variavel:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: nobreak
+    variavel:
+      required: true
+      example: input.sensitivity
+      selector:
+        text:
+    valor:
+      required: true
+      example: medium
+      selector:
+        text:

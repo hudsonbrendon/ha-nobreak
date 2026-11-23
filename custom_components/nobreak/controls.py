@@ -51,3 +51,16 @@ BUTTONS = {
     "silenciar_alarme": "beeper.mute",
     "cancelar_desligamento": "shutdown.stop",
 }
+
+# Commands the nobreak.comando action accepts (never anything that cuts the outlets).
+SAFE_COMMANDS = sorted(
+    {
+        *BUTTONS.values(),
+        "test.panel.stop",
+        "beeper.enable",
+        "beeper.disable",
+        "beeper.on",
+        "beeper.off",
+        "beeper.mute",
+    }
+)

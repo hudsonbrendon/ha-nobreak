@@ -57,6 +57,86 @@
       },
       "firmware": {
         "name": "Firmware"
+      },
+      "saude_da_bateria": {
+        "name": "Battery health",
+        "state_attributes": {
+          "taxa_pct_por_min": {
+            "name": "Discharge rate (%/min)"
+          },
+          "potencia_media_w": {
+            "name": "Mean power (W)"
+          },
+          "medido_em": {
+            "name": "Measured at"
+          },
+          "duracao_s": {
+            "name": "Duration (s)"
+          },
+          "queda_pct": {
+            "name": "Charge drop (%)"
+          }
+        }
+      },
+      "autonomia_real": {
+        "name": "Real runtime",
+        "state_attributes": {
+          "ate_desligamento_min": {
+            "name": "Until shutdown (min)"
+          }
+        }
+      },
+      "energia_hoje": {
+        "name": "Output energy today"
+      },
+      "energia_do_mes": {
+        "name": "Output energy this month"
+      },
+      "custo_hoje": {
+        "name": "Cost today",
+        "state_attributes": {
+          "tarifa": {
+            "name": "Price"
+          }
+        }
+      },
+      "custo_do_mes": {
+        "name": "Cost this month",
+        "state_attributes": {
+          "tarifa": {
+            "name": "Price"
+          }
+        }
+      },
+      "tensao_minima_hoje": {
+        "name": "Minimum input voltage today",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Adequate band"
+          }
+        }
+      },
+      "tensao_maxima_hoje": {
+        "name": "Maximum input voltage today",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Adequate band"
+          }
+        }
+      },
+      "tempo_fora_da_faixa_hoje": {
+        "name": "Time out of band today",
+        "state_attributes": {
+          "faixa_adequada": {
+            "name": "Adequate band"
+          }
+        }
+      },
+      "regulacoes_avr_hoje": {
+        "name": "AVR activations today"
+      },
+      "quedas_hoje": {
+        "name": "Outages today"
       }
     },
     "binary_sensor": {
@@ -115,6 +195,20 @@
     "switch": {
       "alarme_sonoro": {
         "name": "Audible alarm"
+      },
+      "economia_automatica": {
+        "name": "Automatic load shedding",
+        "state_attributes": {
+          "desligados_agora": {
+            "name": "Turned off now"
+          },
+          "estagio_1": {
+            "name": "Stage 1"
+          },
+          "estagio_2": {
+            "name": "Stage 2"
+          }
+        }
       }
     },
     "button": {
@@ -141,6 +235,109 @@
       "data_da_bateria": {
         "name": "Battery date"
       }
+    },
+    "calendar": {
+      "quedas": {
+        "name": "Outages"
+      }
+    },
+    "event": {
+      "eventos": {
+        "name": "Events",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "queda": "Power outage",
+              "retorno": "Power back",
+              "autoteste": "Self-test",
+              "medicao_bateria": "Battery measured",
+              "economia": "Load shedding"
+            }
+          }
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "description": "Price of the output energy and two-stage load shedding while on battery (only for real outages, never during a self-test).",
+        "data": {
+          "tarifa": "Energy price (per kWh)",
+          "economia_estagio1": "Stage 1: turn off",
+          "economia_atraso": "Stage 1 after (minutes on battery)",
+          "economia_estagio2": "Stage 2: turn off",
+          "economia_carga": "Stage 2 at battery charge (%)",
+          "economia_religar": "Turn them back on when power returns"
+        },
+        "data_description": {
+          "tarifa": "Empty: use the fixed grid price of the Energy dashboard."
+        }
+      }
+    }
+  },
+  "issues": {
+    "substituir_bateria": {
+      "title": "UPS: replace the battery",
+      "description": "The UPS reports that its battery must be replaced (RB flag)."
+    },
+    "autoteste_reprovado": {
+      "title": "UPS: self-test failed",
+      "description": "The last self-test result was: {resultado}. Check the battery."
+    },
+    "bateria_antiga": {
+      "title": "UPS: battery is {anos} years old",
+      "description": "The battery was installed on {data}. Sealed lead-acid batteries last 3–5 years; run a deep self-test and plan the replacement."
+    },
+    "saude_baixa": {
+      "title": "UPS: battery health {saude}%",
+      "description": "The last discharge drained the battery much faster than the UPS predicted (health {saude}%). The real runtime is shorter than shown on the UPS."
+    }
+  },
+  "services": {
+    "comando": {
+      "name": "Run command",
+      "description": "Run an allow-listed UPS command (commands that cut the outlets are not available).",
+      "fields": {
+        "config_entry_id": {
+          "name": "UPS",
+          "description": "Needed only with more than one UPS."
+        },
+        "comando": {
+          "name": "Command",
+          "description": "NUT instant command."
+        }
+      }
+    },
+    "definir_variavel": {
+      "name": "Set variable",
+      "description": "Set a writable upsd variable (driver.* excluded).",
+      "fields": {
+        "config_entry_id": {
+          "name": "UPS",
+          "description": "Needed only with more than one UPS."
+        },
+        "variavel": {
+          "name": "Variable",
+          "description": "For example input.sensitivity."
+        },
+        "valor": {
+          "name": "Value",
+          "description": "New value."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "escolha_o_nobreak": {
+      "message": "Choose the UPS (config_entry_id): none or more than one is loaded."
+    },
+    "comando_indisponivel": {
+      "message": "This UPS does not support {comando}."
+    },
+    "variavel_nao_gravavel": {
+      "message": "{variavel} is not writable. Writable: {gravaveis}."
     }
   }
 }

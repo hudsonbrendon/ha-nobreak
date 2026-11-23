@@ -10,9 +10,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from .controls import BATTERY_DATE_VAR
-from .coordinator import NobreakConfigEntry
+from .coordinator import NobreakConfigEntry, battery_date
 from .entity import NobreakEntity
-from .sensor import battery_date
 
 
 async def async_setup_entry(
